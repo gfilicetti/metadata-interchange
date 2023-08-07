@@ -67,11 +67,11 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
         # initialize a client for Google Cloud Spanner
         
         # Your Cloud Spanner instance ID.
-        instance_id = "your-spanner-instance"
-        
+        instance_id = "oaio-test-1"
+
         # Your Cloud Spanner database ID.
-        database_id = "your-spanner-db-id"
-        
+        database_id = "oaio-db-1"
+
         spanner_client = spanner.Client()
         instance = spanner_client.instance(instance_id)
         database = instance.database(database_id)
