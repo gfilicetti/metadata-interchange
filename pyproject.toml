@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 authors = [
-  { name = "MyName", email = "myemail@myserver.com" }
+  { name = "Gino Filicetti", email = "ginof@google.com" }
 ]
 
 description = """\
