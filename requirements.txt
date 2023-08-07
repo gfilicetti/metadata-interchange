@@ -1,3 +1,3 @@
-openassetio
+openassetio==1.0.0a13
 openassetio_mediacreation
 google-cloud-spanner
