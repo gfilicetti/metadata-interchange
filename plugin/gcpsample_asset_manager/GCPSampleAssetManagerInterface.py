@@ -65,6 +65,7 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             )
         
         # initialize a client for Google Cloud Spanner
+        print("Initializing Google Cloud Spanner for our OAIO plugin")
         
         # Your Cloud Spanner instance ID.
         instance_id = "oaio-test-1"
