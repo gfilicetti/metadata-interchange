@@ -28,6 +28,9 @@ from openassetio.managerApi import ManagerInterface
 from openassetio_mediacreation.traits.content import LocatableContentTrait
 from openassetio_mediacreation.traits.managementPolicy import ManagedTrait
 
+# Import the client library.
+from google.cloud import spanner
+
 # OpenAssetIO is building out the implementation vertically, there are
 # known fails for missing abstract methods.
 # pylint: disable=abstract-method
@@ -60,6 +63,27 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             raise KeyError(
                 "GCPSampleAssetManager should take no settings, but managerSettings is not empty"
             )
+        
+        # initialize a client for Google Cloud Spanner
+        
+        # Your Cloud Spanner instance ID.
+        instance_id = "your-spanner-instance"
+        
+        # Your Cloud Spanner database ID.
+        database_id = "your-spanner-db-id"
+        
+        spanner_client = spanner.Client()
+        instance = spanner_client.instance(instance_id)
+        database = instance.database(database_id)
+
+        # Execute a simple SQL statement.
+        with database.snapshot() as snapshot:
+            results = snapshot.execute_sql("SELECT 1")
+
+            for row in results:
+                print(row)
+
+
 
     def displayName(self):
         return "GCP Sample Asset Manager"
