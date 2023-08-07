@@ -32,7 +32,9 @@ managerFactory = ManagerFactory(host_interface, factory_impl, logger)
 
 availableManagers = managerFactory.availableManagers()
 
-print(availableManagers)
+for manager in availableManagers:
+    print(manager.displayName)
+
 exit(0)
 
 # {
