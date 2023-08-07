@@ -35,19 +35,9 @@ availableManagers = managerFactory.availableManagers()
 for manager in availableManagers:
     print(manager.displayName)
 
-exit(0)
-
-# {
-#     'org.openassetio.example.manager':
-#         ManagerFactory.ManagerDetail(
-#             identifier='org.openassetio.example.manager',
-#             displayName='Example Asset Manager',
-#             info={})
-# }
-
 # Once we know which manager we wish to use, we can ask the factory
 # to create one for us.
-manager = managerFactory.createManager('org.openassetio.example.manager')
+manager = managerFactory.createManager('google.manager.gcpsample_asset_manager')
 
 # We now have an instance of the requested manager, but it is not
 # quite ready for use yet. The manager returned by the
@@ -58,6 +48,10 @@ manager = managerFactory.createManager('org.openassetio.example.manager')
 # A manager's current (or in this case default) settings can be
 # queried if needed:
 settings = manager.settings()
+
+for setting in settings:
+    print(setting)
+exit(0)
 # ...and updated with new values as desired.
 settings["server"] = "my.server.com"
 
