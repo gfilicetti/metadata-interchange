@@ -49,12 +49,6 @@ manager = managerFactory.createManager('google.manager.gcpsample_asset_manager')
 # queried if needed:
 settings = manager.settings()
 
-for setting in settings:
-    print(setting)
-exit(0)
-# ...and updated with new values as desired.
-settings["server"] = "my.server.com"
-
 # Finally, we can initialize the manager with the desired settings,
 # preparing it for use. Note that this may include non-trivial
 # amounts of work. Settings updates are sparse, so if you don't have
