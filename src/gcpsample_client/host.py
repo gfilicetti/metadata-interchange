@@ -33,7 +33,6 @@ managerFactory = ManagerFactory(host_interface, factory_impl, logger)
 availableManagers = managerFactory.availableManagers()
 
 for manager in availableManagers:
-    #print(manager.displayName)
     print(manager)
 
 # Once we know which manager we wish to use, we can ask the factory
