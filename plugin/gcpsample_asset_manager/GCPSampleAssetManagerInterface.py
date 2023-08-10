@@ -73,13 +73,15 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             config = toml.load(f)
 
         # Print the key value pairs
-        print(config.items)
+        print("The entire config")
+        print(config)
+
         for key, value in config.items():
             print(key, value)
         
-        # example of printf
-        print(config.items['spanner-instance-id'])
-        print(config.items['spanner-database-id'])
+        # example of printf     
+        print(config['spanner-instance-id'])
+        print(config['spanner-database-id'])
     
         # Your Cloud Spanner instance ID.
         instance_id = "oaio-test-1"
