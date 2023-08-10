@@ -57,6 +57,10 @@ settings = manager.settings()
 # any custom settings, you can pass an empty dictionary here.
 manager.initialize(settings)
 
+# GF: We need to end here because we don't have entities yet so 
+# we'll always get exceptions.
+exit(0)
+
 # Note: this will raise an exception if given a string that is not
 # recognized by this manager as a valid entity reference (ValueError
 # in Python, std::domain_error in C++). Consider
