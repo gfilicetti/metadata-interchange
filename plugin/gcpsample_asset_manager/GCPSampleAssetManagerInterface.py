@@ -28,8 +28,9 @@ from openassetio.managerApi import ManagerInterface
 from openassetio_mediacreation.traits.content import LocatableContentTrait
 from openassetio_mediacreation.traits.managementPolicy import ManagedTrait
 
-# Import the client library.
+# GF: my imports
 from google.cloud import spanner
+import toml
 
 # OpenAssetIO is building out the implementation vertically, there are
 # known fails for missing abstract methods.
@@ -37,6 +38,18 @@ from google.cloud import spanner
 # Methods in C++ end up with "missing docstring"
 # pylint: disable=missing-docstring
 # pylint: disable=too-many-arguments, unused-argument
+
+# GF: Get our config values
+with open('config.toml', 'r') as f:
+    # Read the file contents
+    config = toml.load(f)
+
+# Print the key value pairs
+print(config.items)
+for key, value in config.items():
+    print(key, value)
+
+
 
 
 class GCPSampleAssetManagerInterface(ManagerInterface):
