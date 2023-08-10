@@ -77,7 +77,7 @@ encoding = "utf-8"
 # This allows it to create a placeholder version or similar.
 # NOTE: It is critical to always use the working_ref from now on.
 working_ref = manager.preflight(
-        entity_ref, TextFileSpecification.kTraitSet, context)
+    entity_ref, TextFileSpecification.kTraitSet, context)
 
 # We then check if the manager can tell us where to save the file.
 if ResolvesFutureEntitiesTrait.isImbuedTo(policy):
@@ -106,5 +106,6 @@ context.retention = context.kPermanent
 final_ref = manager.register(working_ref, file_spec.traitsData(), context)
 
 # We can persist this reference as we used the kPermanent retention
-with open(os.path.join(os.path.expanduser('~'), 'history', 'a') as f:
-    f.write(f"{final_ref}\n")
+
+with open(os.path.join(os.path.expanduser('~'), 'history', 'a')) as f:
+   f.write(f"{final_ref}\n")
