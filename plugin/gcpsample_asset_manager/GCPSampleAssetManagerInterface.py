@@ -39,19 +39,6 @@ import toml
 # pylint: disable=missing-docstring
 # pylint: disable=too-many-arguments, unused-argument
 
-# GF: Get our config values
-with open('config.toml', 'r') as f:
-    # Read the file contents
-    config = toml.load(f)
-
-# Print the key value pairs
-print(config.items)
-for key, value in config.items():
-    print(key, value)
-
-
-
-
 class GCPSampleAssetManagerInterface(ManagerInterface):
     """
     Implement the OpenAssetIO ManagerInterface.
@@ -80,6 +67,20 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
         # initialize a client for Google Cloud Spanner
         print("Initializing Google Cloud Spanner for our OAIO plugin")
         
+        # GF: Get our config values
+        with open('config.toml', 'r') as f:
+            # Read the file contents
+            config = toml.load(f)
+
+        # Print the key value pairs
+        print(config.items)
+        for key, value in config.items():
+            print(key, value)
+        
+        # example of printf
+        print(config.items['spanner-instance-id'])
+        print(config.items['spanner-database-id'])
+    
         # Your Cloud Spanner instance ID.
         instance_id = "oaio-test-1"
 
