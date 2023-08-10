@@ -58,7 +58,6 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
         # manager to be constructed quickly in situations where full
         # initialization would be unnecessary and undesirable. See :
         # https://openassetio.github.io/OpenAssetIO/classopenassetio_1_1v1_1_1host_api_1_1_manager.html#aa52c7436ff63ae96e33d7db8d6fd38df
-        print(managerSettings)
         if managerSettings != {}:
             raise KeyError(
                 "GCPSampleAssetManager should take no settings, but managerSettings is not empty"
@@ -72,22 +71,11 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             # Read the file contents
             config = toml.load(f)
 
-        # Print the key value pairs
-        print("The entire config")
-        print(config)
-
-        for key, value in config.items():
-            print(key, value)
-        
-        # example of printf     
-        print(config['cloud-spanner']['instance-id'])
-        print(config['cloud-spanner']['database-id'])
-    
         # Your Cloud Spanner instance ID.
-        instance_id = "oaio-test-1"
+        instance_id = config['cloud-spanner']['instance-id']
 
         # Your Cloud Spanner database ID.
-        database_id = "oaio-db-1"
+        database_id = config['cloud-spanner']['database-id']
 
         spanner_client = spanner.Client()
         instance = spanner_client.instance(instance_id)
