@@ -80,8 +80,8 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             print(key, value)
         
         # example of printf     
-        print(config['spanner-instance-id'])
-        print(config['spanner-database-id'])
+        print(config['cloud-spanner']['instance-id'])
+        print(config['cloud-spanner']['database-id'])
     
         # Your Cloud Spanner instance ID.
         instance_id = "oaio-test-1"
