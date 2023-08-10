@@ -5,6 +5,10 @@ from openassetio.pluginSystem import PythonPluginSystemManagerImplementationFact
 from openassetio import Context
 from openassetio_mediacreation.traits.content import LocatableContentTrait
 from openassetio_mediacreation.traits.managementPolicy import ManagedTrait, ResolvesFutureEntitiesTrait
+
+
+# NOTE: This example will not work because TextFileSpecification does not exist and 
+# is something we need to create on our own
 from openassetio_mediacreation.specifications.files import TextFileSpecification
 
 class ExamplesHost(HostInterface):
