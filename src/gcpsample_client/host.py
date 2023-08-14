@@ -34,6 +34,7 @@ managerFactory = ManagerFactory(host_interface, factory_impl, logger)
 
 availableManagers = managerFactory.availableManagers()
 
+# GF: Let's print the list of available managers to us. (We should only see ours)
 for manager in availableManagers:
     print(manager)
 
