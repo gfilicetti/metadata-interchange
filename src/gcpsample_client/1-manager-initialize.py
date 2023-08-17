@@ -4,7 +4,7 @@ from openassetio.pluginSystem import PythonPluginSystemManagerImplementationFact
 from openassetio import Context
 from openassetio_mediacreation.traits.content import LocatableContentTrait
 
-class ExamplesHost(HostInterface):
+class GCPSampleHost(HostInterface):
     """
     A minimal host implementation.
     """
@@ -26,22 +26,23 @@ logger = SeverityFilter(ConsoleLogger())
 factory_impl = PythonPluginSystemManagerImplementationFactory(logger)
 
 # We then need our implementation of the HostInterface class
-host_interface = ExamplesHost()
+host_interface = GCPSampleHost()
 
 # We can now create an OpenAssetIO ManagerFactory. The ManagerFactory
 # allows us to query the available managers, and pick one to talk to.
+
+# GF: This is the old, manual way to do things
 # managerFactory = ManagerFactory(host_interface, factory_impl, logger)
-
 # availableManagers = managerFactory.availableManagers()
-
 # GF: Let's print the list of available managers to us. (We should only see ours)
 # for manager in availableManagers:
 #     print(manager)
+# manager = managerFactory.createManager('google.manager.gcpsample_asset_manager')
 
-# Once we know which manager we wish to use, we can ask the factory
-# to create one for us.
-#manager = managerFactory.createManager('google.manager.gcpsample_asset_manager')
+# GF: We're going to externalize which manager we want to use in a toml file and just call this one method once
 manager = ManagerFactory.defaultManagerForInterface("manager.toml", host_interface, factory_impl, logger)
+# GF: Still to verify but I think we don't have to bother calling "initialize" when called this way
+# GF: TODO: Test if we can use settings in the .toml and whether they come through during the initialize
 
 # We now have an instance of the requested manager, but it is not
 # quite ready for use yet. The manager returned by the
@@ -51,40 +52,12 @@ manager = ManagerFactory.defaultManagerForInterface("manager.toml", host_interfa
 
 # A manager's current (or in this case default) settings can be
 # queried if needed:
-settings = manager.settings()
+# ????? GF: not needed???? 
+# settings = manager.settings()
 
 # Finally, we can initialize the manager with the desired settings,
 # preparing it for use. Note that this may include non-trivial
 # amounts of work. Settings updates are sparse, so if you don't have
 # any custom settings, you can pass an empty dictionary here.
-manager.initialize(settings)
-
-# GF: We need to end here because we don't have entities yet so 
-# we'll always get exceptions.
-exit(0)
-
-# Note: this will raise an exception if given a string that is not
-# recognized by this manager as a valid entity reference (ValueError
-# in Python, std::domain_error in C++). Consider
-# createEntityReferenceIfValid, if unsure of the string.
-entity_reference = manager.createEntityReference("location")
-
-# All calls to the manager must have a Context, these should always
-# be created by the target manager. The Context expresses the host's
-# intent, and ensure that any manager state is properly managed
-# between API calls.
-context = manager.createContext()
-
-# We describe what we want to do with the asset
-context.access = context.access.kRead
-
-# We describe the lifetime of the returned reference
-# as persistent retention may require a more stable value.
-context.retention = context.retention.kTransient
-
-# We can now resolve a token we may have if it is a reference. In
-# this example, we'll attempt to resolve the LocatableContent trait
-# for the entity.
-resolved_asset = manager.resolve(
-        entity_reference, {LocatableContentTrait.kId}, context)
-url = LocatableContentTrait(resolved_asset).getLocation()  # May be None
+# ????? GF: not needed???? 
+# manager.initialize(settings)

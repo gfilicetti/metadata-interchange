@@ -6,12 +6,9 @@ from openassetio import Context
 from openassetio_mediacreation.traits.content import LocatableContentTrait
 from openassetio_mediacreation.traits.managementPolicy import ManagedTrait, ResolvesFutureEntitiesTrait
 
-
-# NOTE: This example will not work because TextFileSpecification does not exist and 
-# is something we need to create on our own
-from openassetio_mediacreation.specifications.files import TextFileSpecification
-
-class ExamplesHost(HostInterface):
+# GF: We're a host here and need to get a manager initialized
+# - look at 1-manager-initialize.py for more comments on creating a host
+class GCPSampleHost(HostInterface):
     """
     A minimal host implementation.
     """
@@ -21,43 +18,14 @@ class ExamplesHost(HostInterface):
     def displayName(self):
         return "Google OpenAssetIO Examples"
 
-# For simplicity, use a filtered console logger, this logs to
-# stderr based on the value of OPENASSETIO_LOGGING_SEVERITY.
-# Practically you may wish to provide a bridge to your own logging
-# mechanism if you have one.
 logger = SeverityFilter(ConsoleLogger())
-
-# We need to provide the mechanism by which managers are created, the
-# built-in plugin system allows these to be loaded from
-# OPENASSETIO_PLUGIN_PATH.
 factory_impl = PythonPluginSystemManagerImplementationFactory(logger)
+host_interface = GCPSampleHost()
+manager = ManagerFactory.defaultManagerForInterface("manager.toml", host_interface, factory_impl, logger)
 
-# We then need our implementation of the HostInterface class
-host_interface = ExamplesHost()
-
-# We can now create an OpenAssetIO ManagerFactory. The ManagerFactory
-# allows us to query the available managers, and pick one to talk to.
-managerFactory = ManagerFactory(host_interface, factory_impl, logger)
-
-# Once we know which manager we wish to use, we can ask the factory
-# to create one for us.
-manager = managerFactory.createManager('google.manager.gcpsample_asset_manager')
-
-# We now have an instance of the requested manager, but it is not
-# quite ready for use yet. The manager returned by the
-# ManagerFactory needs to be initialized before it can be used to
-# query or publish assets. Setup is split into two stages to allow
-# adjustments to its settings to be made prior to use if required.
-
-# A manager's current (or in this case default) settings can be
-# queried if needed:
-settings = manager.settings()
-
-# Finally, we can initialize the manager with the desired settings,
-# preparing it for use. Note that this may include non-trivial
-# amounts of work. Settings updates are sparse, so if you don't have
-# any custom settings, you can pass an empty dictionary here.
-manager.initialize(settings)
+# GF: NOTE: This example will not work because TextFileSpecification does not exist and 
+# is something we need to create on our own
+from openassetio_mediacreation.specifications.files import TextFileSpecification
 
 # As ever, an appropriately configured context is required
 context = manager.createContext()
@@ -79,9 +47,13 @@ encoding = "utf-8"
 
 # Whenever we make new data, we always tell the manager first,
 # This allows it to create a placeholder version or similar.
+# We must provide the manager with any relevant information that the
+# host owns (i.e. won't be queried from the manager during
+# publishing) and can be provided up-front.
+file_spec = TextFileSpecification.create()
+file_spec.markupTrait().setMarkupType("plain")
 # NOTE: It is critical to always use the working_ref from now on.
-working_ref = manager.preflight(
-    entity_ref, TextFileSpecification.kTraitSet, context)
+working_ref = manager.preflight(entity_ref, file_spec, context)
 
 # We then check if the manager can tell us where to save the file.
 if ResolvesFutureEntitiesTrait.isImbuedTo(policy):
@@ -110,6 +82,5 @@ context.retention = context.kPermanent
 final_ref = manager.register(working_ref, file_spec.traitsData(), context)
 
 # We can persist this reference as we used the kPermanent retention
-
 with open(os.path.join(os.path.expanduser('~'), 'history', 'a')) as f:
    f.write(f"{final_ref}\n")
