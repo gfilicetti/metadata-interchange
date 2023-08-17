@@ -30,17 +30,18 @@ host_interface = ExamplesHost()
 
 # We can now create an OpenAssetIO ManagerFactory. The ManagerFactory
 # allows us to query the available managers, and pick one to talk to.
-managerFactory = ManagerFactory(host_interface, factory_impl, logger)
+# managerFactory = ManagerFactory(host_interface, factory_impl, logger)
 
-availableManagers = managerFactory.availableManagers()
+# availableManagers = managerFactory.availableManagers()
 
 # GF: Let's print the list of available managers to us. (We should only see ours)
-for manager in availableManagers:
-    print(manager)
+# for manager in availableManagers:
+#     print(manager)
 
 # Once we know which manager we wish to use, we can ask the factory
 # to create one for us.
-manager = managerFactory.createManager('google.manager.gcpsample_asset_manager')
+#manager = managerFactory.createManager('google.manager.gcpsample_asset_manager')
+manager = ManagerFactory.defaultManagerForInterface("manager.toml", host_interface, factory_impl, logger)
 
 # We now have an instance of the requested manager, but it is not
 # quite ready for use yet. The manager returned by the

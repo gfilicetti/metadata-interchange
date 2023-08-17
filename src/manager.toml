@@ -1,0 +1,5 @@
+[manager]
+identifier = "google.manager.gcpsample_asset_manager"
+
+#[manager.settings]  # Optional
+#some_setting = "value"
