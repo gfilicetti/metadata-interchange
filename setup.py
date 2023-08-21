@@ -6,7 +6,7 @@ import os
 from shutil import copyfile
 from setuptools import setup
 
-import openassetio_traitgen
+from openassetio_traitgen import generate
 
 # The python sources don't exist in this repo, but are generated via
 # openassetio-traitgen at point of build.
