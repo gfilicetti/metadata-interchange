@@ -95,9 +95,11 @@ specifications:
             name: LocatableContent
           - namespace: identity
             name: DisplayName
+  video:
+    description: Specifications for commonly encountered video types.
+    members:
       DigitalVideo:
         description: >
-          Non-animated pixel based images with data stored in an external BLOB.
           3D moving pictures visual content from digital source content and stored in an external BLOB
         usage:
           - entity
