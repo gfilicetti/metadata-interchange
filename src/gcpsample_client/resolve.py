@@ -3,6 +3,8 @@ from openassetio_mediacreation.traits.content import LocatableContentTrait
 from gcpsample_client import manager_initialize
 
 print("We're in resolve.py")
+manager = manager_initialize.manager
+print(manager)
 exit(0)
 # Note: this will raise an exception if given a string that is not
 # recognized by this manager as a valid entity reference (ValueError
