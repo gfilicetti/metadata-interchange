@@ -44,6 +44,7 @@ manager = ManagerFactory.defaultManagerForInterface("manager.toml", host_interfa
 # GF: Still to verify but I think we don't have to bother calling "initialize" when called this way
 # GF: TODO: Test if we can use settings in the .toml and whether they come through during the initialize
 
+print("Yay, it worked")
 # We now have an instance of the requested manager, but it is not
 # quite ready for use yet. The manager returned by the
 # ManagerFactory needs to be initialized before it can be used to
