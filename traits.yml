@@ -1,0 +1,114 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/OpenAssetIO/OpenAssetIO-TraitGen/main/python/openassetio_traitgen/schema.json
+# yamllint disable-line rule:document-start
+package: openassetio-gcpsample
+
+description: Traits and Specifications for the GCP pilot for OpenAssetIO
+
+traits:
+  image:
+    description: >
+      Traits that describe 2D visual content such as pixel and vector
+      based graphics.
+    members:
+      Image:
+        description: A base trait for all 2D visual content.
+        usage:
+          - entity
+      Raster:
+        description: Visual content defined by a 2D grid of pixels.
+        usage:
+          - entity
+        properties:
+          width:
+            type: integer
+            description: The number of columns in the pixel grid.
+          height:
+            type: integer
+            description: The number of rows in the pixel grid.
+          pixelAspectRatio:
+            type: float
+            description: >
+              The aspect ratio of each pixel when presented. Expressed
+              as width/height.
+      OCIOColorManaged:
+        description: >
+          Details of the color space of the image data, when used in an
+          OpenColorIO managed pipeline.
+        usage:
+          - entity
+        properties:
+          colorspace:
+            type: string
+            description: A valid OCIO color space name
+  video:
+    description: >
+      Traits that describe 3D moving pictures visual content such as digital and film based video assets
+    members:
+      Video:
+        description: A base trait for all 3D moving pictures
+        usage:
+          - entity
+      Digital:
+        description: Visual content defined by 3D moving pictures
+        usage:
+          - entity
+        properties:
+          width:
+            type: integer
+            description: The width of the video
+          height:
+            type: integer
+            description: The height of the video
+          pixelAspectRatio:
+            type: float
+            description: >
+              The aspect ratio of the video. Expressed as width/height.
+      OCIOColorManaged:
+        description: >
+          Details of the color space of the video, when used in an
+          OpenColorIO managed pipeline.
+        usage:
+          - entity
+        properties:
+          colorspace:
+            type: string
+            description: A valid OCIO color space name
+
+specifications:
+  image:
+    description: Specifications for commonly encountered image types.
+    members:
+      RasterImage:
+        description: >
+          Non-animated pixel based images with data stored in an
+          external BLOB.
+        usage:
+          - entity
+        traitSet:
+          - namespace: image
+            name: Image
+          - namespace: image
+            name: Raster
+          - namespace: image
+            name: OCIOColorManaged
+          - namespace: content
+            name: LocatableContent
+          - namespace: identity
+            name: DisplayName
+      DigitalVideo:
+        description: >
+          Non-animated pixel based images with data stored in an external BLOB.
+          3D moving pictures visual content from digital source content and stored in an external BLOB
+        usage:
+          - entity
+        traitSet:
+          - namespace: video
+            name: Video
+          - namespace: video
+            name: Digital
+          - namespace: video
+            name: OCIOColorManaged
+          - namespace: content
+            name: LocatableContent
+          - namespace: identity
+            name: DisplayName

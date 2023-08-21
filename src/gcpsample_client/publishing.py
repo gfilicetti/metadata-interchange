@@ -4,24 +4,13 @@ from openassetio.hostApi import HostInterface, Manager, ManagerFactory
 from openassetio.pluginSystem import PythonPluginSystemManagerImplementationFactory
 from openassetio import Context
 from openassetio_mediacreation.traits.content import LocatableContentTrait
+from openassetio_mediacreation.traits.auth import BearerTokenTrait
+from openassetio_mediacreation.traits.identity import DisplayNameTrait
 from openassetio_mediacreation.traits.managementPolicy import ManagedTrait, ResolvesFutureEntitiesTrait
+from gcpsample_client import manager_initialize
 
-# GF: We're a host here and need to get a manager initialized
-# - look at 1-manager-initialize.py for more comments on creating a host
-class GCPSampleHost(HostInterface):
-    """
-    A minimal host implementation.
-    """
-    def identifier(self):
-        return "google.openassetio.examples"
-
-    def displayName(self):
-        return "Google OpenAssetIO Examples"
-
-logger = SeverityFilter(ConsoleLogger())
-factory_impl = PythonPluginSystemManagerImplementationFactory(logger)
-host_interface = GCPSampleHost()
-manager = ManagerFactory.defaultManagerForInterface("manager.toml", host_interface, factory_impl, logger)
+print("We're in publishing.py")
+manager = manager_initialize.manager
 
 # GF: NOTE: This example will not work because TextFileSpecification does not exist and 
 # is something we need to create on our own

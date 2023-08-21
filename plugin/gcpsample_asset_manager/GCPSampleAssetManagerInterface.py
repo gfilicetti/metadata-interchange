@@ -48,10 +48,13 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
     # Entity references provided to this asset manager should be
     # prefixed with this string to be considered valid.
     # eg. "gcpsample_asset_manager:///my_entity_id"
-    __reference_prefix = "gcpsample_asset_manager:///"
+    __reference_prefix = "gsam:///"
 
     def identifier(self):
         return "google.manager.gcpsample_asset_manager"
+
+    def displayName(self):
+        return "GCP Sample Asset Manager"
 
     def initialize(self, managerSettings, hostSession):
         # Do any necessary heavy initialization here, allowing for the
@@ -87,11 +90,6 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
 
             for row in results:
                 print(row)
-
-
-
-    def displayName(self):
-        return "GCP Sample Asset Manager"
 
     def info(self):
         # This hint allows the API middleware to short-circuit calls to

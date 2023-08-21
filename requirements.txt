@@ -1,3 +1,4 @@
 openassetio
 openassetio_mediacreation
+openassetio_traitgen
 google-cloud-spanner
