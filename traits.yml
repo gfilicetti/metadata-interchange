@@ -96,6 +96,12 @@ specifications:
           - package: openassetio-mediacreation
             namespace: identity
             name: DisplayName
+          - package: openassetio-mediacreation
+            namespace: managementPolicy
+            name: Managed
+          - package: openassetio-mediacreation
+            namespace: managementPolicy
+            name: ResolvesFutureEntities
   video:
     description: Specifications for commonly encountered video types.
     members:
@@ -117,3 +123,9 @@ specifications:
           - package: openassetio-mediacreation
             namespace: identity
             name: DisplayName
+          - package: openassetio-mediacreation
+            namespace: managementPolicy
+            name: Managed
+          - package: openassetio-mediacreation
+            namespace: managementPolicy
+            name: ResolvesFutureEntities
