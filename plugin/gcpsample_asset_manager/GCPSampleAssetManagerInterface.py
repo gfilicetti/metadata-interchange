@@ -26,7 +26,7 @@ This is the entry-point for the logic of your asset manager.
 from openassetio import constants, BatchElementError, TraitsData
 from openassetio.managerApi import ManagerInterface
 from openassetio_mediacreation.traits.content import LocatableContentTrait
-from openassetio_mediacreation.traits.managementPolicy import ManagedTrait, ResolvesFutureEntities
+from openassetio_mediacreation.traits.managementPolicy import ManagedTrait, ResolvesFutureEntitiesTrait
 
 # GF: my imports
 from google.cloud import spanner
@@ -117,7 +117,7 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             # as well as the traits we are able to supply data for. It's
             # important to get this right, for more info, see:
             # https://openassetio.github.io/OpenAssetIO/classopenassetio_1_1v1_1_1host_api_1_1_manager.html#acdf7d0c3cef98cce7abaf8fb5f004354
-            if context.isForWrite() and ResolvesFutureEntities.kId in traitSet:
+            if context.isForWrite() and ResolvesFutureEntitiesTrait.kId in traitSet:
                 print("Wow I'm actually WRITING!")
 
             if context.isForRead() and LocatableContentTrait.kId in traitSet:
