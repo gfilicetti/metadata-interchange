@@ -40,7 +40,7 @@ if not ManagedTrait.isImbuedTo(policy):
 # host owns (i.e. won't be queried from the manager during
 # publishing) and can be provided up-front.
 video_spec = DigitalVideoSpecification.create()
-video_spec.identityTrait().setDisplayName("Ginos Home Video")
+video_spec.displayNameTrait().setName("Ginos Home Video")
 # NOTE: It is critical to always use the working_ref from now on.
 working_ref = manager.preflight(entity_ref, video_spec, context)
 
@@ -50,7 +50,7 @@ if ResolvesFutureEntitiesTrait.isImbuedTo(policy):
             working_ref, DigitalVideoSpecification.kTraitSet, context)
     working_spec = DigitalVideoSpecification(working_data)
     # GF: just print the display name
-    print(f"This video is called: {working_spec.identityTrait().getDisplayName}")
+    print(f"This video is called: {working_spec.displayNameTrait().getName}")
 
     # GF: this is the old code for files, not needed for now
     # if save_url := working_spec.locatableContentTrait().getLocation():
