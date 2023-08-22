@@ -80,8 +80,7 @@ specifications:
     members:
       RasterImage:
         description: >
-          Non-animated pixel based images with data stored in an
-          external BLOB.
+          Non-animated pixel based images with data stored in an external BLOB.
         usage:
           - entity
         traitSet:
@@ -91,9 +90,11 @@ specifications:
             name: Raster
           - namespace: image
             name: OCIOColorManaged
-          - namespace: content
+          - package: openassetio-mediacreation
+            namespace: content
             name: LocatableContent
-          - namespace: identity
+          - package: openassetio-mediacreation
+            namespace: identity
             name: DisplayName
   video:
     description: Specifications for commonly encountered video types.
@@ -110,7 +111,9 @@ specifications:
             name: Digital
           - namespace: video
             name: OCIOColorManaged
-          - namespace: content
+          - package: openassetio-mediacreation
+            namespace: content
             name: LocatableContent
-          - namespace: identity
+          - package: openassetio-mediacreation
+            namespace: identity
             name: DisplayName
