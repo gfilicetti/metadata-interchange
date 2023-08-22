@@ -8,13 +8,12 @@ from openassetio_mediacreation.traits.auth import BearerTokenTrait
 from openassetio_mediacreation.traits.identity import DisplayNameTrait
 from openassetio_mediacreation.traits.managementPolicy import ManagedTrait, ResolvesFutureEntitiesTrait
 from gcpsample_client import manager_initialize
+# GF: This imports from our generated traits/specs
+from gcpsample.specifications.video import DigitalVideoSpecification
+
 
 print("We're in publishing.py")
 manager = manager_initialize.manager
-
-# GF: NOTE: This example will not work because TextFileSpecification does not exist and 
-# is something we need to create on our own
-from gcpsample_asset_manager.specifications.video import DigitalVideoSpecification
 
 # As ever, an appropriately configured context is required
 context = manager.createContext()
