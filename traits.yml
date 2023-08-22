@@ -40,39 +40,25 @@ traits:
           colorspace:
             type: string
             description: A valid OCIO color space name
-  video:
-    description: >
-      Traits that describe 3D moving pictures visual content such as digital and film based video assets
+  time:
+    description: Traits that define timporal qualities
     members:
-      Video:
-        description: A base trait for all 3D moving pictures
-        usage:
-          - entity
-      Digital:
-        description: Visual content defined by 3D moving pictures
-        usage:
-          - entity
-        properties:
-          width:
-            type: integer
-            description: The width of the video
-          height:
-            type: integer
-            description: The height of the video
-          pixelAspectRatio:
-            type: float
-            description: >
-              The aspect ratio of the video. Expressed as width/height.
-      OCIOColorManaged:
+      FrameRanged:
         description: >
-          Details of the color space of the video, when used in an
-          OpenColorIO managed pipeline.
+          The image is animated over time such as a video or image
+          sequence. Time is parameterized using a frame range.
         usage:
           - entity
         properties:
-          colorspace:
-            type: string
-            description: A valid OCIO color space name
+          startFame:
+            type: integer
+            description: The number of the first frame
+          endFame:
+            type: integer
+            description: The number of the last frame
+          frameRate:
+            type: float
+            description: The number of frames to play per second
 
 specifications:
   image:
@@ -96,26 +82,23 @@ specifications:
           - package: openassetio-mediacreation
             namespace: identity
             name: DisplayName
-          - package: openassetio-mediacreation
-            namespace: managementPolicy
-            name: Managed
-          - package: openassetio-mediacreation
-            namespace: managementPolicy
-            name: ResolvesFutureEntities
   video:
     description: Specifications for commonly encountered video types.
     members:
       DigitalVideo:
         description: >
-          3D moving pictures visual content from digital source content and stored in an external BLOB
+          3D moving pictures visual content from digital source content
+          and stored in an external BLOB
         usage:
           - entity
         traitSet:
-          - namespace: video
-            name: Video
-          - namespace: video
-            name: Digital
-          - namespace: video
+          - namespace: image
+            name: Image
+          - namespace: image
+            name: Raster
+          - namespace: time
+            name: FrameRanged
+          - namespace: image
             name: OCIOColorManaged
           - package: openassetio-mediacreation
             namespace: content
@@ -123,9 +106,3 @@ specifications:
           - package: openassetio-mediacreation
             namespace: identity
             name: DisplayName
-          - package: openassetio-mediacreation
-            namespace: managementPolicy
-            name: Managed
-          - package: openassetio-mediacreation
-            namespace: managementPolicy
-            name: ResolvesFutureEntities
