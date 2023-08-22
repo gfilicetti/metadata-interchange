@@ -17,7 +17,7 @@ manager = manager_initialize.manager
 
 # As ever, an appropriately configured context is required
 context = manager.createContext()
-context.access = access.kWrite
+context.access = context.Access.kWrite
 
 # The first step is to see if the manager wants to manage text files
 policy = manager.managementPolicy([DigitalVideoSpecification.kTraitSet], context)[0]
