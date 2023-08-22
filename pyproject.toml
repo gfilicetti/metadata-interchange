@@ -28,7 +28,8 @@ plugin_package_or_module = "gcpsample_asset_manager"
 
 [build-system]
 requires = [
-    "setuptools>=65.5.0"
+    "setuptools>=65.5.0",
+    "openassetio-traitgen>=1.0.0a6"
 ]
 build-backend = "setuptools.build_meta"
 
