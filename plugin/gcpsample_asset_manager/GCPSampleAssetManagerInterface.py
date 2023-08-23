@@ -112,10 +112,6 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             # as well as the traits we are able to supply data for. It's
             # important to get this right, for more info, see:
             # https://openassetio.github.io/OpenAssetIO/classopenassetio_1_1v1_1_1host_api_1_1_manager.html#acdf7d0c3cef98cce7abaf8fb5f004354
-            if context.isForWrite() and ResolvesFutureEntitiesTrait.kId in traitSet:
-                ManagedTrait.imbueTo(policy)
-                ResolvesFutureEntitiesTrait.imbueTo(policy)
-
             if context.isForRead() and LocatableContentTrait.kId in traitSet:
                 ManagedTrait.imbueTo(policy)
                 LocatableContentTrait.imbueTo(policy)
