@@ -67,18 +67,13 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             )
         
         # initialize a client for Google Cloud Spanner
-        print("Initializing Google Cloud Spanner for our OAIO plugin")
+        hostSession.logger().debug("Initializing Google Cloud Spanner for our OAIO plugin")
         
-        # GF: Get our config values
-        with open('config.toml', 'r') as f:
-            # Read the file contents
-            config = toml.load(f)
-
         # Your Cloud Spanner instance ID.
-        instance_id = config['cloud-spanner']['instance-id']
+        instance_id = managerSettings.get('cloud-spanner-instance-id')
 
         # Your Cloud Spanner database ID.
-        database_id = config['cloud-spanner']['database-id']
+        database_id = managerSettings.get('cloud-spanner-database-id')
 
         spanner_client = spanner.Client()
         instance = spanner_client.instance(instance_id)
@@ -117,10 +112,6 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             # as well as the traits we are able to supply data for. It's
             # important to get this right, for more info, see:
             # https://openassetio.github.io/OpenAssetIO/classopenassetio_1_1v1_1_1host_api_1_1_manager.html#acdf7d0c3cef98cce7abaf8fb5f004354
-            if context.isForWrite() and ResolvesFutureEntitiesTrait.kId in traitSet:
-                ManagedTrait.imbueTo(policy)
-                ResolvesFutureEntitiesTrait.imbueTo(policy)
-
             if context.isForRead() and LocatableContentTrait.kId in traitSet:
                 ManagedTrait.imbueTo(policy)
                 LocatableContentTrait.imbueTo(policy)
