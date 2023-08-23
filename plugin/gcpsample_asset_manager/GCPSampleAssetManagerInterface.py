@@ -67,18 +67,13 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             )
         
         # initialize a client for Google Cloud Spanner
-        print("Initializing Google Cloud Spanner for our OAIO plugin")
+        hostSession.logger().debug("Initializing Google Cloud Spanner for our OAIO plugin")
         
-        # GF: Get our config values
-        with open('config.toml', 'r') as f:
-            # Read the file contents
-            config = toml.load(f)
-
         # Your Cloud Spanner instance ID.
-        instance_id = config['cloud-spanner']['instance-id']
+        instance_id = managerSettings.get('cloud-spanner-instance-id')
 
         # Your Cloud Spanner database ID.
-        database_id = config['cloud-spanner']['database-id']
+        database_id = managerSettings.get('cloud-spanner-database-id')
 
         spanner_client = spanner.Client()
         instance = spanner_client.instance(instance_id)
