@@ -91,6 +91,10 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
             for row in results:
                 print(row)
 
+    def preflight(self, entity_ref, spec, context):
+        print("We're pre-flying! Return back whatever was passed in")
+        return entity_ref
+
     def info(self):
         # This hint allows the API middleware to short-circuit calls to
         # `isEntityReferenceString` using string prefix comparisons. If
@@ -144,12 +148,41 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
         # info()
         return someString.startswith(self.__reference_prefix)
 
+    def register(
+        self, targetEntityRefs, entityTraitsDatas, context, hostSession, successCallback, errorCallback
+    ):
+        # GF this is where we do our writes
+        if context.isForWrite():
+            print(f"We need to write this entity ({targetEntityRefs}) and its traits")
+            print(f"Traits are: {entityTraitsDatas}")
+
+        if context.isForRead():
+            result = BatchElementError(
+                BatchElementError.ErrorCode.kEntityAccessError, "Entities should be write when calling register()"
+            )
+            for idx in range(len(entityReferences)):
+                errorCallback(idx, result)
+            return
+
+        # GF: this code is from the BAL
+        # for idx, ref in enumerate(targetEntityRefs):
+        #     try:
+        #         entity_info = self.__parse_entity_ref(ref.toString())
+        #         traits_dict = self.__traits_data_to_dict(entityTraitsDatas[idx])
+        #         updated_entity_info = bal.create_or_update_entity(
+        #             entity_info, traits_dict, self.__library
+        #         )
+        #         successCallback(idx, self.__build_entity_ref(updated_entity_info))
+        #     except Exception as exc:  # pylint: disable=broad-except
+        #         self.__handle_exception(exc, idx, errorCallback)
+
     def resolve(
         self, entityReferences, traitSet, context, hostSession, successCallback, errorCallback
     ):
         # If your resolver doesn't support write, like this one, reject
         # a write context via calling the error callback.
         if context.isForWrite():
+            print("We need to write this entity and its traits")
             result = BatchElementError(
                 BatchElementError.ErrorCode.kEntityAccessError, "Entities are read-only"
             )

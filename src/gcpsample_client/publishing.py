@@ -41,14 +41,20 @@ if not ManagedTrait.isImbuedTo(policy):
 # publishing) and can be provided up-front.
 video_spec = DigitalVideoSpecification.create()
 video_spec.displayNameTrait().setName("Ginos Home Video")
+
+# GF: The entity reference is under our control, so we'll just hardcode this for now.
+entity_ref = "2023-08-23-video-ginoshomevideo"
 # NOTE: It is critical to always use the working_ref from now on.
 working_ref = manager.preflight(entity_ref, video_spec, context)
 
 # We then check if the manager can tell us where to save the file.
 if ResolvesFutureEntitiesTrait.isImbuedTo(policy):
-    working_data = manager.resolve(
-            working_ref, DigitalVideoSpecification.kTraitSet, context)
-    working_spec = DigitalVideoSpecification(working_data)
+    # GF: I won't be resolving
+    # working_data = manager.resolve(
+    #         working_ref, DigitalVideoSpecification.kTraitSet, context)
+    # GF for now working spec IS the video spec
+    # working_spec = DigitalVideoSpecification(working_data)
+    working_spec = video_spec
     # GF: just print the display name
     print(f"This video is called: {working_spec.displayNameTrait().getName}")
 
@@ -75,8 +81,9 @@ print("We are now publishing the Digital Video")
 # Now the data has been written, we register the file and the publish
 # is complete. Update the context retention to denote that we're going
 # to save a reference to this entity in our user's history.
-context.retention = context.kPermanent
-final_ref = manager.register(working_ref, video_spec.traitsData(), context)
+# GF: The "retention" concept is going away, so commenting this out for now
+# context.retention = context.kPermanent
+final_ref = manager.register(working_ref, working_spec.traitsData(), context)
 
 # GF: instead lets just print to the console
 print(f"The final reference is: {final_ref}")
