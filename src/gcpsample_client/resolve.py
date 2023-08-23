@@ -21,10 +21,6 @@ context = manager.createContext()
 # We describe what we want to do with the asset
 context.access = context.access.kRead
 
-# We describe the lifetime of the returned reference
-# as persistent retention may require a more stable value.
-context.retention = context.retention.kTransient
-
 # We can now resolve a token we may have if it is a reference. In
 # this example, we'll attempt to resolve the LocatableContent trait
 # for the entity.

@@ -40,9 +40,7 @@ host_interface = GCPSampleHost()
 # manager = managerFactory.createManager('google.manager.gcpsample_asset_manager')
 
 # GF: We're going to externalize which manager we want to use in a toml file and just call this one method once
-manager = ManagerFactory.defaultManagerForInterface("manager.toml", host_interface, factory_impl, logger)
-# GF: Still to verify but I think we don't have to bother calling "initialize" when called this way
-# GF: TODO: Test if we can use settings in the .toml and whether they come through during the initialize
+manager = ManagerFactory.defaultManagerForInterface(host_interface, factory_impl, logger)
 
 print("Yay, it worked")
 # We now have an instance of the requested manager, but it is not
