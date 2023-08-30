@@ -61,10 +61,12 @@ class GCPSampleAssetManagerInterface(ManagerInterface):
         # manager to be constructed quickly in situations where full
         # initialization would be unnecessary and undesirable. See :
         # https://openassetio.github.io/OpenAssetIO/classopenassetio_1_1v1_1_1host_api_1_1_manager.html#aa52c7436ff63ae96e33d7db8d6fd38df
-        if managerSettings != {}:
-            raise KeyError(
-                "GCPSampleAssetManager should take no settings, but managerSettings is not empty"
-            )
+        print("Our manager settings")
+        print(managerSettings)
+        # if managerSettings != {}:
+        #     raise KeyError(
+        #         "GCPSampleAssetManager should take no settings, but managerSettings is not empty"
+        #     )
         
         # initialize a client for Google Cloud Spanner
         print("Initializing Google Cloud Spanner for our OAIO plugin")

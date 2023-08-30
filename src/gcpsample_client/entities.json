@@ -1,0 +1,34 @@
+{
+	"entities": {
+		"video": {
+			"versions": [
+				{
+					"traits": {
+						"video": { "y": 1 },
+						"digital": { "y": 2 },
+						"oCIOColorManaged": { "y": 3 },
+						"locatableContent": { "y": 4 },
+						"displayName": { "y": 5 },
+						"managed": { "y": 6 },
+						"resolvesFutureEntities": { "y": 7 }
+					}
+				}
+			]
+		},
+		"image": {
+			"versions": [
+				{
+					"traits": {
+						"image": { "x": 1},
+						"raster": { "x": 2 },
+						"oCIOColorManager": { "x": 3 },
+						"locatableContent": { "x": 4 },
+						"displayName": { "x": 5 },
+						"managed": { "x": 6 },
+						"resolvesFutureEntities": { "x": 7 }
+					}
+				}
+			]
+		}
+	}
+}

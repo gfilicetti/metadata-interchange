@@ -1,5 +1,6 @@
 [manager]
 identifier = "google.manager.gcpsample_asset_manager"
 
-#[manager.settings]  # Optional
-#some_setting = "value"
+[manager.settings]
+library_path = "${config_dir}/entities.json"
+entity_reference_url_scheme = "para"
