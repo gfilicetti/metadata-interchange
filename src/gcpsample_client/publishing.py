@@ -43,7 +43,8 @@ video_spec = DigitalVideoSpecification.create()
 video_spec.displayNameTrait().setName("Ginos Home Video")
 
 # GF: The entity reference is under our control, so we'll just hardcode this for now.
-entity_ref = "2023-08-23-video-ginoshomevideo"
+# entity_ref = "2023-08-23-video-ginoshomevideo"
+entity_ref = "para:///video/digital"
 # GF: Resolve the entity reference
 entity_reference = manager.createEntityReference(entity_ref)
 # NOTE: It is critical to always use the working_ref from now on.
