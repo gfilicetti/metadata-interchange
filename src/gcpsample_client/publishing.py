@@ -44,9 +44,11 @@ video_spec.displayNameTrait().setName("Ginos Home Video")
 
 # GF: The entity reference is under our control, so we'll just hardcode this for now.
 entity_ref = "2023-08-23-video-ginoshomevideo"
+# GF: Resolve the entity reference
+entity_reference = manager.createEntityReference(entity_ref)
 # NOTE: It is critical to always use the working_ref from now on.
 print("Calling preflight")
-working_ref = manager.preflight(entity_ref, video_spec, context)
+working_ref = manager.preflight(entity_reference, video_spec, context)
 print("DONE calling preflight")
 
 # We then check if the manager can tell us where to save the file.
